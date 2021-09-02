@@ -13,7 +13,7 @@ contract PuppyNFTMarket is ReentrancyGuard {
   Counters.Counter private _itemsSold;
 
   address payable owner;
-  uint256 listingPrice = 0.1 ether;
+  uint256 listingPrice = 0.0005 ether;
 
   constructor() {
     owner = payable(msg.sender);
@@ -81,7 +81,7 @@ contract PuppyNFTMarket is ReentrancyGuard {
     ) public payable nonReentrant {
     uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
-    require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+    require(msg.value == price, "Please submit the asking price.");
 
     idToMarketItem[itemId].seller.transfer(msg.value);
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);

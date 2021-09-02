@@ -48,13 +48,14 @@ export default function Home() {
   if (loaded === 'not-loaded' && !nfts.length) return (<button onClick={loadNFTs} className="rounded bg-blue-600 py-2 px-12 text-white m-16">Fetch NFT Assets</button>)
   return (
     <div className="flex justify-center">
-      <div style={{ width: 900 }}>
+      <div style={{ width: 1200 }}>
         <div className="grid grid-cols-2 gap-4 pt-8">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border p-4 shadow">
                 <img src={nft.image} className="rounded" />
-                <p className="text-2xl my-4 font-bold">Last Price : {nft.price}</p>
+                <p className="text-2xl my-4 font-bold">Last Price : {nft.price} BNB</p>
+                <p className="text-2xl my-4 font-bold">Sell: {nft.price} BNB</p>
               </div>
             ))
           }

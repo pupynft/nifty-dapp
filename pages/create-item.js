@@ -25,11 +25,11 @@ export default function Home() {
       cacheProvider: true,
     });
     const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)    
+    const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
    // z const currency = '0xaCB3e4fFddE7C4E35b1c4a49f92b914BEb8Edf34';
-    
-    
+
+
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
     let transaction = await contract.createToken(url)
     let tx = await transaction.wait()
@@ -37,12 +37,12 @@ export default function Home() {
     let value = event.args[2]
     let tokenId = value.toNumber()
     const price = web3.utils.toWei(formInput.price, 'ether')
-  
-    const listingPrice = web3.utils.toWei('0.1', 'ether')
+
+  const listingPrice = web3.utils.toWei('0.1', 'ether')
 
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
-    
+
     await transaction.wait()
     router.push('/')
   }
@@ -59,7 +59,7 @@ export default function Home() {
       setFileUrl(url)
     } catch (error) {
       console.log('Error uploading file: ', error);
-    }  
+    }
   }
   async function createMarket() {
     const { name, description, price } = formInput
@@ -74,13 +74,13 @@ export default function Home() {
       createSale(url)
     } catch (error) {
       console.log('Error uploading file: ', error);
-    }  
+    }
   }
 
   return (
     <div className="flex justify-center">
       <div className="w-1/2 flex flex-col pb-12">
-        <input 
+        <input
           placeholder="NFT Name"
           className="mt-8 border rounded p-4"
           onChange={e => updateFormInput({ ...formInput, name: e.target.value })}

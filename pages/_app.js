@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
       <nav className="border-b px-12 py-6">
   <div  className="mr-4 text-black-500">
       <img src="./puppy.svg" width="96" height = "96" />
-      Puppy NFT | A Decentralize NFT Marketplace Running on BSC [BETA]</div>
+  <h2>    Puppy NFT | A Decentralize NFT Marketplace Running on BSC [BETA]</h2></div>
         <div className="flex mt-4">
           <Link href="/">
             <a className="mr-4 text-blue-500">
