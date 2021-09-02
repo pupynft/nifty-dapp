@@ -38,7 +38,7 @@ export default function Home() {
     let tokenId = value.toNumber()
     const price = web3.utils.toWei(formInput.price, 'ether')
 
-  const listingPrice = web3.utils.toWei('0.1', 'ether')
+  const listingPrice = web3.utils.toWei('0.0005', 'ether')
 
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
