@@ -32,5 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
-/hardhat.config.js
+hardhat.*.js
 node_modules
+secrets.json
