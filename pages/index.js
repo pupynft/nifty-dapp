@@ -38,7 +38,9 @@ export default function Home() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
-        ipfs: meta.data.fileUrl,
+        name: meta.data.name,
+        desp: meta.data.description,
+        ipfsUrl: meta.data.image,
       }
       return item
     }))
@@ -55,7 +57,7 @@ export default function Home() {
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-//     const url = `https://ipfs.infura.io/ipfs/${added.path}`
+//  const url = `https://ipfs.infura.io/ipfs/${added.path}`
     const price = web3.utils.toWei(nft.price.toString(), 'ether');
 
     console.log('price: ', price);
@@ -74,11 +76,14 @@ export default function Home() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border p-4 shadow">
+                <p className="text-2xl my-4 font-bold"> {nft.name} </p>
                 <img src={nft.image} className="rounded" />
                 <p className="text-2xl my-4 font-bold">Price: {nft.price} BNB</p>
-                <button className="bg-blue-600 text-white py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
                 <p> NFT ID: {nft.tokenId} </p>
-                <p> IPFS Proof: {nft.tokenUri}</p>
+                <p> Description: {nft.desp}</p>
+                <p> IPFS Proof: <a href = {nft.ipfsUrl} target="_blank"><b>IPFS Link</b></a></p><br />
+                <button className="bg-blue-600 text-white py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button><br /><br />
+
               </div>
             ))
           }
