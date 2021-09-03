@@ -38,6 +38,7 @@ export default function Home() {
         seller: i.seller,
         owner: i.owner,
         image: meta.data.image,
+        ipfs: meta.data.fileUrl,
       }
       return item
     }))
@@ -50,11 +51,11 @@ export default function Home() {
       network: "binance",
       cacheProvider: true,
     });
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
+//     const url = `https://ipfs.infura.io/ipfs/${added.path}`
     const price = web3.utils.toWei(nft.price.toString(), 'ether');
 
     console.log('price: ', price);
@@ -68,14 +69,16 @@ export default function Home() {
   if (loaded === 'loaded' && !nfts.length) return (<h1 className="p-20 text-4xl">Sorry you have no NFT assets.</h1>)
   return (
     <div className="flex justify-center">
-      <div style={{ width: 900 }}>
-        <div className="grid grid-cols-2 gap-4 pt-8">
+      <div style={{ width: 1200 }}>
+        <div className="grid grid-cols-3 gap-4 pt-8">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border p-4 shadow">
                 <img src={nft.image} className="rounded" />
                 <p className="text-2xl my-4 font-bold">Price: {nft.price} BNB</p>
-                <button className="bg-green-600 text-white py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
+                <button className="bg-blue-600 text-white py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
+                <p> NFT ID: {nft.tokenId} </p>
+                <p> IPFS Proof: {nft.tokenUri}</p>
               </div>
             ))
           }
