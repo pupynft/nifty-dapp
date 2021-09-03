@@ -41,6 +41,7 @@ export default function Home() {
         name: meta.data.name,
         desp: meta.data.description,
         ipfsUrl: meta.data.image,
+        metaData: tokenUri,
       }
       return item
     }))
@@ -76,12 +77,13 @@ export default function Home() {
           {
             nfts.map((nft, i) => (
               <div key={i} className="border p-4 shadow">
-                <p className="text-2xl my-4 font-bold"> {nft.name} </p>
+                <p className="text-2xl my-4 font-bold"> {nft.name} <hr /></p>
                 <img src={nft.image} className="rounded" />
                 <p className="text-2xl my-4 font-bold">Price: {nft.price} BNB</p>
-                <p> NFT ID: {nft.tokenId} </p>
-                <p> Description: {nft.desp}</p>
-                <p> IPFS Proof: <a href = {nft.ipfsUrl} target="_blank"><b>IPFS Link</b></a></p><br />
+                <p> NFT ID: <b> {nft.tokenId} </b> </p>
+                <p> Description: <b> {nft.desp} </b> </p>
+                <p> IPFS Proof: <a href = {nft.ipfsUrl} target="_blank"><b>IPFS Link</b></a></p>
+                <p> Metadata: <a href = {nft.metaData} target="_blank"><b>Metadata Link</b></a></p><br />
                 <button className="bg-blue-600 text-white py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button><br /><br />
 
               </div>
