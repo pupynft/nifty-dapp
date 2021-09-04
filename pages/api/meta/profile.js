@@ -88,16 +88,13 @@ const getScreenshot = async ({ html, type = "png" }) => {
   });
 };
 
-
+async function writeHead(){
     const image = Buffer.from(
       getBase64("./meta.png"),
       "base64"
     );
-
-    // Return screenshot
     res.writeHead(200, { "Content-Type": "image/png" });
     res.end(image);
-  }
 };
 
 /**
