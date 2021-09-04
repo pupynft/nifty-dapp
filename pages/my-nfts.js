@@ -45,7 +45,7 @@ export default function Home() {
     setLoaded('loaded')
   }
   if (loaded === 'loaded' && !nfts.length) return (<h1 className="p-20 text-4xl">Sorry you have no NFT assets.</h1>)
-  if (loaded === 'not-loaded' && !nfts.length) return (<button onClick={loadNFTs} className="rounded bg-blue-600 py-2 px-12 text-white m-16">Fetch NFT Assets</button>)
+  if (loaded === 'not-loaded' && !nfts.length) return (<button onClick={loadNFTs} className="rounded bg-blue-600 py-2 px-12 text-white m-16">My NFT Assets</button>)
   return (
     <div className="flex justify-center">
       <div style={{ width: 1200 }}>
@@ -55,7 +55,8 @@ export default function Home() {
               <div key={i} className="border p-4 shadow">
                 <img src={nft.image} className="rounded" />
                 <p className="text-2xl my-4 font-bold">Last Price : {nft.price} BNB</p>
-                <p className="text-2xl my-4 font-bold">Sell: {nft.price} BNB</p>
+                <p className="text-2xl my-4 font-bold">Sell: {nft.price} BNB* <hr /></p><br />
+                <p className="text-2xl my-4 font-bold"><i>** You can re-sell/sell your NFT assets at any price after<u> 9th September 2021</u></i></p>
               </div>
             ))
           }

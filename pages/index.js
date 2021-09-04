@@ -73,7 +73,7 @@ export default function Home() {
   return (
     <div className="flex justify-center">
       <div style={{ width: 1200 }}>
-        <div className="grid grid-cols-3 gap-4 pt-8">
+        <div className="grid grid-cols-4 gap-4 pt-8">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border p-4 shadow">
