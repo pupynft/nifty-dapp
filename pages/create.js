@@ -21,13 +21,14 @@ export default function Home() {
 
   async function createSale(url) {
     const web3Modal = new Web3Modal({
+      rpc: "https://bsc-dataseed.binance.org",
       network: "binance",
       cacheProvider: true,
     });
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
-   // z const currency = '0xaCB3e4fFddE7C4E35b1c4a49f92b914BEb8Edf34';
+  
 
 
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
