@@ -4,17 +4,18 @@
   padding-right: 4px;
   padding-left: 4px;
   margin-right: 2px;
-  margin-bottom: 40px;
+  margin-left: 2px;
+  margin-bottom: 70px;
   display: flex;
   justify-content: space-between;
   -webkit-box-pack: justify;
   align-items: center;
-  background-color: #B67A3A;
-  box-shadow: 2px 4px #0B0818;
+  background-color: #1F2327;
+  box-shadow: 2px 4px #423737;
   position: sticky;
   top: 0px;
   z-index: 9999;
-  border-radius: 6px;
+  border-radius: 12px;
   color: #fff;
 
   div {
@@ -80,13 +81,20 @@
 .footertext {
   color: #494949;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   -webkit-box-pack: justify;
   align-items: center;
 }
+
 // Responsiveness
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 960px) {
   .header {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .container {
     padding-left: 12px;
     padding-right: 12px;
   }

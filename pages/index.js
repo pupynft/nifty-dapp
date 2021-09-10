@@ -6,6 +6,7 @@ import Market from '../artifacts/contracts/NFTMarket.sol/PuppyNFTMarket.json';
 import { ethers } from 'ethers';
 import { useState, useEffect } from "react"; // React state management
 // import styles from "../styles/pages/Home.module.scss"; // Component styles
+import styles from "../styles/components/Header.module.scss"; // Component styles
 import { providers } from "ethers"; // Ethers
 import { createContainer } from "unstated-next"; // Unstated-next containerization
 import web3 from 'web3'
@@ -17,12 +18,13 @@ import Web3Modal from "web3modal";
 
 export default function Home() {
   const [nfts, setNfts] = useState([]);
-  const [loaded, setLoaded] = useState('not-loaded');
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     loadNFTs()
   }, [])
 async function loadNFTs() {
-const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed.binance.org', 56)
+
+const provider = new ethers.providers.JsonRpcProvider('https://bsc-dataseed.binance.org')
 const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
 const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
 const data = await marketContract.fetchMarketItems()
@@ -48,18 +50,17 @@ const data = await marketContract.fetchMarketItems()
     setNfts(items)
     setLoaded('loaded')
   }
-  async function buyNft(nft) {
-
-  const web3Modal = new Web3Modal({
-  rpc: "https://bsc-dataseed.binance.org",
-  network: "binance",
-  cacheProvider: true,
+ async function buyNft(nft) {
+    const web3Modal = new Web3Modal({
+      network: "binance",
+      cacheProvider: true,
     });
-const connection = await web3Modal.connect()
-const provider = new ethers.providers.Web3Provider(connection)
-const signer = provider.getSigner()
-const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-const price = web3.utils.toWei(nft.price.toString(), 'ether');
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+
+    const price = web3.utils.toWei(nft.price.toString(), 'ether');
 
     console.log('price: ', price);
 
@@ -72,8 +73,8 @@ const price = web3.utils.toWei(nft.price.toString(), 'ether');
   if (loaded === 'loaded' && !nfts.length) return (<h1 className="p-20 text-4xl">Sorry you have no NFT assets.</h1>)
   return (
     <div className="flex justify-center">
-      <div style={{ width: 1200 }}>
-        <div className="grid grid-cols-4 gap-4 pt-8">
+      <div className={styles.container} style={{ width: 960 }}>
+        <div className="grid grid-cols-4 auto-rows-auto">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border p-4 shadow">
@@ -95,4 +96,3 @@ const price = web3.utils.toWei(nft.price.toString(), 'ether');
     </div>
   )
 }
-

@@ -28,7 +28,7 @@ export default function Home() {
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
-  
+
 
 
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
@@ -105,7 +105,7 @@ export default function Home() {
         />
         {
           fileUrl && (
-            <img className="rounded mt-4" width="350" src={fileUrl} />
+        <p>    <img className="rounded mt-4" width="350" src={fileUrl} /><b><a href={fileUrl}>{fileUrl}</a></b> </p>
           )
         }
         <button onClick={createMarket} className="mt-4 bg-blue-500 text-white rounded p-4 shadow-lg">

@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
             <a>
               <img src="./puppy.svg" alt="Puppy NFT" />
             </a>
-          </Link>&nbsp;&nbsp;<h1><b>Puppy NFT | A Decentralize NFT Marketplace Running on BSC [BETA] </b> </h1>
+          </Link>&nbsp;&nbsp;<h1><b>Puppy NFT [ BETA - PC Only ] </b> </h1>
         </div>
 
         <div className={styles.header__menu}>
@@ -25,12 +25,14 @@ function MyApp({ Component, pageProps }) {
           <Link href="/create">
           <a className={styles.header__menu_button_blue}>Create NFT</a>
           </Link>
+          {/*
           <Link href="/">
           <a className={styles.header__menu_button_blue}>History</a>
           </Link>
           <Link href="/">
           <a className={styles.header__menu_button_blue}>Cross-Chain</a>
           </Link>
+          */}
           <Link href="https://t.me/puppynft" target ="_blank">
           <a className={styles.header__menu_button_blue}>Community</a>
           </Link>

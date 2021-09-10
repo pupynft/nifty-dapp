@@ -31,19 +31,23 @@ pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-
 import "hardhat/console.sol";
+
+
+
+
+
 
 contract PuppyNFTMarket is ReentrancyGuard {
   using Counters for Counters.Counter;
   Counters.Counter private _itemIds;
   Counters.Counter private _itemsSold;
+  
+   
 
   address payable owner;
   uint256 listingPrice = 0.0005 ether;
-  bytes32 private constant DOMAIN_SALT = 0x4e621494881f38baf5be3f5cea59349b7fb9ba568d85e7ac80d99bc02f033980; // Puppy static  salt
-  bytes32 private constant DOMAIN_NAME_HASH = keccak256("Puppy Token");
-  
+
   
   constructor() {
     owner = payable(msg.sender);
@@ -78,9 +82,8 @@ contract PuppyNFTMarket is ReentrancyGuard {
     uint256 tokenId,
     uint256 price
   ) public payable nonReentrant {
-    require(price > 0, "Price must be at least 1 wei");
-    require(msg.value == listingPrice, "Price must be equal to listing price");
-
+    require(price > 0.001 ether, "Price must be");
+ 
     _itemIds.increment();
     uint256 itemId = _itemIds.current();
 
@@ -105,9 +108,6 @@ contract PuppyNFTMarket is ReentrancyGuard {
     );
   }
 
-      function uniqueIdentifier(string memory DOMAIN_SALT) public view returns (string memory){
-     return DOMAIN_SALT;
-     }
 
   function createMarketSale(
     address nftContract,
@@ -115,14 +115,16 @@ contract PuppyNFTMarket is ReentrancyGuard {
     ) public payable nonReentrant {
     uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
-    require(msg.value == price, "Please submit the asking price.");
-
+    require(msg.value == price, "Please submit the asking price in order to complete the purchase");
     idToMarketItem[itemId].seller.transfer(msg.value);
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
     idToMarketItem[itemId].owner = payable(msg.sender);
     _itemsSold.increment();
     payable(owner).transfer(listingPrice);
   }
+  
+
+
 
   function fetchMarketItem(uint itemId) public view returns (MarketItem memory) {
     MarketItem memory item = idToMarketItem[itemId];
